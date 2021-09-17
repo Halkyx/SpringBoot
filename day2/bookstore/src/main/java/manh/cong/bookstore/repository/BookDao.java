@@ -19,20 +19,17 @@ public class BookDao extends Dao<Book> {
     return collections;
   }
 
-  // Xem chi tiết một đầu sách theo id
   @Override
   public Optional<Book> get(int id) {
     return Optional
         .ofNullable(collections.stream().filter(book -> book.getId() == id).collect(Collectors.toList()).get(0));
   }
 
-  // Thêm mới một đầu sách
   @Override
   public void add(Book t) {
     collections.add(t);
   }
 
-  // Cập nhật một đầu sách theo id
   @Override
   public void update(int id, Book t) {
     int index = -1;
@@ -45,7 +42,6 @@ public class BookDao extends Dao<Book> {
     collections.set(index, t);
   }
 
-  // Xóa một đầu sách theo id
   @Override
   public void deleteByID(int id) {
     collections.removeIf(book -> book.getId() == id);

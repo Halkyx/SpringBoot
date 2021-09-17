@@ -10,16 +10,12 @@ public abstract class Dao<T> {
 
   public abstract List<T> getAll();
 
-  // Xem chi tiết một đầu sách theo id
   public abstract Optional<T> get(int id);
 
-  // Thêm mới một đầu sách
   public abstract void add(T t);
 
-  // Cập nhật một đầu sách theo id
   public abstract void update(int id, T t);
 
-  // Xóa một đầu sách theo id
   public abstract void deleteByID(int id);
 
 }

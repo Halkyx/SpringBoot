@@ -29,14 +29,12 @@ public class RESTController {
         return ResponseEntity.ok().body(bookDao.getAll());
     }
 
-    // Xem chi tiết một đầu sách theo id
     @GetMapping("/id")
     public ResponseEntity<Optional<Book>> getBookById(@RequestParam(value = "id") int id) {
         BookDao bookDao = new BookDao();
         return ResponseEntity.ok().body(bookDao.get(id));
     }
 
-    // Thêm mới một đầu sách
     @PostMapping("/booksAfterAdd")
     public ResponseEntity<List<Book>> addBooks(@RequestParam(value = "id") int id,
             @RequestParam(value = "title") String title, @RequestParam(value = "description") String description) {
@@ -44,7 +42,6 @@ public class RESTController {
         return ResponseEntity.ok().body(bookDao.getAll());
     }
 
-    // Cập nhật một đầu sách theo id
     @PutMapping("/booksAfterUpdate")
     public ResponseEntity<List<Book>> updateBook(@RequestParam(value = "id") int id,
             @RequestParam(value = "title") String title, @RequestParam(value = "description") String description) {
@@ -52,7 +49,6 @@ public class RESTController {
         return ResponseEntity.ok().body(bookDao.getAll());
     }
 
-    // Xóa một đầu sách theo id
     @DeleteMapping("/booksAfterDelete")
     public ResponseEntity<List<Book>> deleteBook(@RequestParam(value = "id") int id) {
         bookDao.deleteByID(id);
