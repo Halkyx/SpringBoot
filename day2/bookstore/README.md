@@ -1,4 +1,3 @@
-## RESTFUL API
 ### 1. Tạo các medthod trong `BookDao.java`
 ```java
 public class BookDao extends Dao<Book> {
@@ -14,20 +13,17 @@ public class BookDao extends Dao<Book> {
     return collections;
   }
 
-  // Xem chi tiết một đầu sách theo id
   @Override
   public Optional<Book> get(int id) {
     return Optional
         .ofNullable(collections.stream().filter(book -> book.getId() == id).collect(Collectors.toList()).get(0));
   }
 
-  // Thêm mới một đầu sách
   @Override
   public void add(Book t) {
     collections.add(t);
   }
 
-  // Cập nhật một đầu sách theo id
   @Override
   public void update(int id, Book t) {
     int index = -1;
@@ -40,7 +36,6 @@ public class BookDao extends Dao<Book> {
     collections.set(index, t);
   }
 
-  // Xóa một đầu sách theo id
   @Override
   public void deleteByID(int id) {
     collections.removeIf(book -> book.getId() == id);
@@ -49,7 +44,7 @@ public class BookDao extends Dao<Book> {
 }
 ```
 
-### 2. Ở thư mục `controller` tạo file mới `RESTController.java`
+### 2. Tạo file `RESTController.java`
 ```java
 @RestController
 @CrossOrigin
@@ -64,14 +59,12 @@ public class RESTController {
         return ResponseEntity.ok().body(bookDao.getAll());
     }
 
-    // Xem chi tiết một đầu sách theo id
     @GetMapping("/id")
     public ResponseEntity<Optional<Book>> getBookById(@RequestParam(value = "id") int id) {
         BookDao bookDao = new BookDao();
         return ResponseEntity.ok().body(bookDao.get(id));
     }
 
-    // Thêm mới một đầu sách
     @PostMapping("/booksAfterAdd")
     public ResponseEntity<List<Book>> addBooks(@RequestParam(value = "id") int id,
             @RequestParam(value = "title") String title, @RequestParam(value = "description") String description) {
@@ -79,7 +72,6 @@ public class RESTController {
         return ResponseEntity.ok().body(bookDao.getAll());
     }
 
-    // Cập nhật một đầu sách theo id
     @PutMapping("/booksAfterUpdate")
     public ResponseEntity<List<Book>> updateBook(@RequestParam(value = "id") int id,
             @RequestParam(value = "title") String title, @RequestParam(value = "description") String description) {
@@ -87,7 +79,7 @@ public class RESTController {
         return ResponseEntity.ok().body(bookDao.getAll());
     }
 
-    // Xóa một đầu sách theo id
+
     @DeleteMapping("/booksAfterDelete")
     public ResponseEntity<List<Book>> deleteBook(@RequestParam(value = "id") int id) {
         bookDao.deleteByID(id);
@@ -97,17 +89,17 @@ public class RESTController {
 }
 ```
 ### 3. Check kết quả trên Postman
-3.1. Method GET - Lấy ra listBooks ban đầu
+a. Method GET - Lấy ra listBooks ban đầu
 ![](images/books.PNG)
 
-3.2. Xem chi tiết một đầu sách theo id
+b. Xem chi tiết một đầu sách theo id
 ![](images/id2.PNG)
 
-3.3. Thêm mới một đầu sách
+c. Thêm mới một đầu sách
 ![](images/bookAfterAdd.PNG)
 
-3.4. Cập nhật một đầu sách theo id
+d. Cập nhật một đầu sách theo id
 ![](images/booksAfterUpdate.PNG)
 
-3.5. Xóa một đầu sách theo id
+d. Xóa một đầu sách theo id
 ![](images/bookAfterDelete.PNG)
