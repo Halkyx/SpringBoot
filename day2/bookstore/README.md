@@ -1,4 +1,4 @@
-### 1. Tạo các medthod trong `BookDao.java`
+### 1. Tạo methods trong `BookDao.java`
 ```java
 public class BookDao extends Dao<Book> {
 
