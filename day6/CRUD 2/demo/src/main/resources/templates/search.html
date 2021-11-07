@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="template::head"> </head>
+
+<body>
+  
+  <div class="nav" >
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs|pills" id="navId" role="tablist">
+      <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: grey">
+        <div class="container">
+          <a th:href="@{/}" class="navbar-brand">Home </a>
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/search}"  style="color: goldenrod;">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/add}">Add new</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </ul>
+    <div class="whitespace" style="padding-top: 56px"></div>
+  </div>
+
+  <div class="context" align="center">
+    <form th:action="@{/search}" method="POST">
+      <table class="table w-auto">
+        <div th:object="${keyword}">
+          <tr>
+            <th style="padding-top: 15px;">Title</th>
+            <td style="padding-top: 15px;">
+              <input type="text" th:value="${keyword}" placeholder="Search full name or email" name="keyword"/>
+            </td>
+          </tr>
+        </div>
+        <div th:object="${sort}">
+          <tr>
+            <th style="padding-top: 15px;">Sort by</th>
+            <td style="padding-top: 15px;">
+              <select name="sort">
+                <option th:selected="${#strings.equals(sort, '')}" value="">-- Select an Option --</option>
+                <option th:selected="${#strings.equals(sort, 'fullNameInc')}" value="fullNameInc">Full Name (A - Z)
+                </option>
+                <option th:selected="${#strings.equals(sort, 'fullNameDec')}" value="fullNameDec">Full Name (Z - A)
+                </option>
+              </select>
+            </td>
+          </tr>
+        </div>
+      </table>
+      
+      <a><button type="submit" class="btn btn-primary">Search</button></a>
+    </form>
+    <br>
+    <table class="table table-striped w-auto table-hover" >
+      <thead class="thead bg-success text-white">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>See full info</th>
+        </tr>
+      </thead>
+      <tbody class="tbody">
+        <tr th:each="employee: ${employees}">
+          <td th:text="${employee.firstName}"></td>
+          <td th:text="${employee.lastName}"></td>
+          <td th:text="${employee.email}"></td>
+          <td><a th:href="@{/{id}(id=${employee.id})}" class="btn btn-primary" style="background-color: lightskyblue" >Click here</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</div>
+</body>
+</html>

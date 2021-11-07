@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="template::head"> </head>
+
+<body>
+
+  <div class="nav" >
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs|pills" id="navId" role="tablist">
+      <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: grey">
+        <div class="container">
+          <a th:href="@{/}" class="navbar-brand" >Home </a>
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/search}">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/add}" style="color: goldenrod;">Add new</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </ul>
+    <div class="whitespace" style="padding-top: 56px"></div>
+  </div>
+
+  <div class="context" align="center">
+    <form action="#" th:action="@{/save}" th:object="${employee}" method="post" novalidate="novalidate">
+      <input type="hidden" placeholder="id" th:field="*{id}" /><br></br>
+      <input type="text" placeholder="First Name" th:field="*{firstName}" />
+      <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</div><br><br>
+      <input type="text" placeholder="Last Name" th:field="*{lastName}" />
+      <div class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</div><br><br>
+      <input type="text" placeholder="Email" th:field="*{email}" />
+      <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div><br><br>
+      <input type="text" placeholder="Id Card" th:field="*{idCard}" /><br><br>
+      <a th:href="@{/}"><button type="button" class="btn btn-primary" style="background-color: red;">Cancel</button></a>
+      <a><button type="submit" class="btn btn-primary">Save</button></a>
+  </div>
+  </form>
+</body>
+
+</html>
